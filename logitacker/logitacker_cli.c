@@ -1240,7 +1240,7 @@ bool pre_cmd_callback_covert_channel(nrf_cli_t const * p_cli, char const * const
     }
 
     if (strcmp(p_cmd_buf, "!pwnplc") == 0) {
-        return pre_cmd_callback_covert_channel(p_cli, pyPwnPLC);
+        return pre_cmd_callback_covert_channel(p_cli, PwnPLC);
     }
     
     if (strcmp(p_cmd_buf, "!pwnplc120s") == 0) {
